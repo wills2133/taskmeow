@@ -9,8 +9,8 @@ html
     script(src="https://alcdn.msauth.net/browser/2.11.0/js/msal-browser.min.js", integrity="sha384-mxc9xXB8zELCYWdhT4JCez24AMsgk+uN7e991ek2TrQy9rBPVlUiuppobVCuja8S", crossorigin="anonymous")
 
     script.
-      microsoftTeams.initialize();
-
+      microsoftTeams.initialize(()=>{}, ["*.teams.microsoft.net"]);
+      
       // Get the tab context and use the information to set the domain and login hints
       microsoftTeams.getContext((context) => {
 
@@ -20,7 +20,7 @@ html
             clientId:
               window.location.hostname === "taskmeow.com"
                 ? "36b1586d-b1da-45d2-9b32-899c3757b6f8"
-                : "ab93102c-869b-4d34-a921-a31d3e7f76ef",
+                : "175df185-3845-4690-ae1e-74d72cafb213",
             redirectUri: `${window.location.origin}/tab/v2/silent-end`,
             navigateToLoginRequestUrl: false,
           },

@@ -6,19 +6,16 @@ import * as msal from "@azure/msal-browser";
 class TeamsAuthService {
   constructor() {
     // Initialize the Teams SDK
-    microsoftTeams.initialize();
+    microsoftTeams.initialize(() => {}, [
+      "https://admin-local.teams.microsoft.net",
+    ]);
 
     this.api =
-      window.location.hostname === "taskmeow.com"
-        ? "api://taskmeow.com/botid-36b1586d-b1da-45d2-9b32-899c3757b6f8/access_as_user"
-        : "api://taskmeow.ngrok.io/botid-ab93102c-869b-4d34-a921-a31d3e7f76ef/access_as_user";
+      "api://4330-2001-4898-a000-9-c1e8-613d-8428-da57.ngrok.io/175df185-3845-4690-ae1e-74d72cafb213/access_as_user";
 
     this.app = new msal.PublicClientApplication({
       auth: {
-        clientId:
-          window.location.hostname === "taskmeow.com"
-            ? "36b1586d-b1da-45d2-9b32-899c3757b6f8"
-            : "ab93102c-869b-4d34-a921-a31d3e7f76ef",
+        clientId: "175df185-3845-4690-ae1e-74d72cafb213",
         redirectUri: `${window.location.origin}/tab/v2/silent-end`,
         navigateToLoginRequestUrl: false,
       },
@@ -89,18 +86,20 @@ class TeamsAuthService {
         context.tid === "9188040d-6c67-4c5b-b112-36a304b66dad"
           ? "consumers"
           : "organizations";
+      const param = {
+        loginHint: context.loginHint,
+        scopes: [this.api],
+        extraQueryParameters: { domain_hint: domainHint },
+      };
+      console.log("-------context", window.location.hostname, context, param);
       return this.app
-        .acquireTokenSilent({
-          loginHint: context.loginHint,
-          scopes: [this.api],
-          extraQueryParameters: { domain_hint: domainHint },
-        })
+        .acquireTokenSilent(param)
         .then((response) => {
-          console.log("Token refresh succeeded: " + JSON.stringify(response));
+          console.log("Token refresh succeeded: ", response);
           return response.accessToken;
         })
         .catch((error) => {
-          console.error("Token refresh failed: " + JSON.stringify(error));
+          console.error("Token refresh failed: ", error);
           return Promise.reject(error);
         });
     });

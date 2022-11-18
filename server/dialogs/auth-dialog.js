@@ -1,6 +1,6 @@
 const builder = require("botbuilder");
 const msteams = require("botbuilder-teams");
-const uuidv4 = require("uuid/v4");
+const uuidv4 = require("uuid");
 
 const authService = require("../auth-service");
 const taskService = require("../task-service");

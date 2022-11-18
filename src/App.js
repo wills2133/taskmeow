@@ -17,6 +17,7 @@ import microsoftLogo from "./microsoft.png";
 import background from "./background.png";
 import logo from "./logo.svg";
 import "./App.css";
+// import * as microsoftTeams from "@microsoft/teams-js";
 
 // Initialize Office Fabric icons for use throughout app
 import { initializeIcons } from "@uifabric/icons";
@@ -37,6 +38,9 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // microsoftTeams.initialize(() => {}, [
+    //   "https://admin-local.teams.microsoft.net",
+    // ]);
     authService
       .isCallback()
       .then((isCallback) => {
@@ -68,6 +72,17 @@ class App extends Component {
   }
 
   login = () => {
+    // console.log("to get context");
+    // microsoftTeams.authentication.getAuthToken({
+    //   successCallback: (token) => {
+    //     console.log("--------TeamsAuthService token", token);
+    //   },
+    //   failureCallback: (error) =>
+    //   console.log("--------TeamsAuthService token error", error),
+    // });
+    // microsoftTeams.getContext((context) => {
+    //   console.log("--------TeamsAuthService context", context);
+    // });
     this.setState({ loading: true });
     authService
       .login()
@@ -85,6 +100,7 @@ class App extends Component {
   };
 
   render() {
+    console.log("this.state", this.state);
     return (
       <div className="App" style={{ backgroundImage: `url(${background})` }}>
         {!this.state.loading && !this.state.error ? (

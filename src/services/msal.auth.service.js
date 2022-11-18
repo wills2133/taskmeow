@@ -54,8 +54,12 @@ class MsalAuthService {
       prompt: "select_account",
     };
 
+    console.log("window.navigator.standalone", window.navigator.standalone);
     if (window.navigator.standalone) {
-      return this.app.loginRedirect(authRequest);
+      return this.app.loginPopup(authRequest).then((authResponse) => {
+        this.app.setActiveAccount(authResponse.account);
+        return authResponse.account;
+      });
     } else {
       return this.app.loginPopup(authRequest).then((authResponse) => {
         this.app.setActiveAccount(authResponse.account);

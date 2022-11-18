@@ -6,8 +6,9 @@ import TeamsAuthService from "./teams.auth.service";
 class SSOAuthService {
   constructor() {
     // Initialize the Teams SDK
-    microsoftTeams.initialize();
-
+    microsoftTeams.initialize(() => {}, [
+      "https://admin-local.teams.microsoft.net",
+    ]);
     this.authToken = null;
   }
 

@@ -35,6 +35,23 @@
       "webRoot": "${workspaceRoot}/src"
     },
     {
+      "type": "chrome",
+      "request": "attach",
+      "name": "Attach to chrome",
+      "skipFiles": ["<node_internals>/**"],
+      "port": 9222,
+      "urlFilter": "https://*.ngrok.io",
+      "webRoot": "${workspaceFolder}/src",
+      "trace": true
+    },
+    {
+      "type": "firefox",
+      "request": "attach",
+      "name": "Attach to firefox",
+      "skipFiles": ["<node_internals>/**"],
+      "port": 9222,
+    },
+    {
       "type": "node",
       "request": "launch",
       "name": "Launch Server",

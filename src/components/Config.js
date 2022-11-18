@@ -21,7 +21,9 @@ class Config extends Component {
   }
 
   componentDidMount() {
-    microsoftTeams.initialize();
+    microsoftTeams.initialize(() => {}, [
+      "https://admin-local.teams.microsoft.net",
+    ]);
     microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
       let contentUrl = `${window.location.origin}/group/?${
         this.state.inTeamsSSO ? "inTeamsSSO=true" : "inTeams=true"

@@ -42,7 +42,9 @@ class Tasks extends Component {
     });
 
     if (this.state.inTeams) {
-      microsoftTeams.initialize();
+      microsoftTeams.initialize(() => {}, [
+        "https://admin-local.teams.microsoft.net",
+      ]);
       microsoftTeams.getContext((context) => {
         this.setState({
           threadId: context.teamId || context.chatId,

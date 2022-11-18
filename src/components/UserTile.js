@@ -33,6 +33,7 @@ class UserTile extends Component {
           error.statusCode === 403 &&
           error.statusMessage === "ConsentRequired"
         ) {
+          console.error("get image error", error);
           this.props.setConsentRequired && this.props.setConsentRequired(true);
         }
       });

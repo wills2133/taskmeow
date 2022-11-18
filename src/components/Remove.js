@@ -12,7 +12,9 @@ class Remove extends Component {
   state = {};
 
   componentDidMount() {
-    microsoftTeams.initialize();
+    microsoftTeams.initialize(() => {}, [
+      "https://admin-local.teams.microsoft.net",
+    ]);
     microsoftTeams.settings.registerOnRemoveHandler((removeEvent) => {
       removeEvent.notifySuccess();
     });
