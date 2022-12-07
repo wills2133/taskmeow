@@ -234,6 +234,8 @@ class Tasks extends Component {
           </ConsentConsumer>
         </div>
 
+        <button onClick={() => this.share({ _id: 123 })}>share</button>
+
         {activeTask ? (
           <TaskPane
             isOpen={activeTask}
